@@ -16,7 +16,7 @@
     * Recycle helper methods from other projects in View
 
 * *NOTE: I likely won't do this as linearly as I outlined and may work on one CRUD route as a time from backend to frontend (e.g. start with adding a Panel, then move to Reading Panels, etc). Then move onto the next
-
+* *ANOTHER NOTE In fact I DO plan on fleshing out each layer bit by, starting from the Data Layer but moving up into View as I go
 
 ## Start With Panel and Material Enum
 
@@ -40,3 +40,6 @@
 * Getter for retrieving the abbreviation
 
 ## Data Layer
+
+### PanelRepository Interface
+* Interface that will act as a dependency for **PanelFileRepository**
