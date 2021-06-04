@@ -119,6 +119,13 @@
 * These methods will add messages to an instance of PanelResult if errors happen, and those messages will get passed back to the controller
   * Controller checks for messages, and if there are none, that indicates the action was performed successfully
 
+### Testing
+* For testing the service, we must use a **RepositoryDouble** which is basically just a copy of our PanelFileRepository and implements the PanelRepository interface
+  * This will help establish known good state while keeping our actual data repository separate from the service
+  * The double itself will have in its constructor some dummy data for establishing state
+* This test file will be much more rigorous than the PanelFileRepository test as we have to make sure the methods are checking for bad data correctly, necessitating far more test cases
+  * e.g. we have to make sure int/col are <= 250, checking to make sure no duplicates are added, ensuring required fields are filled out, etc
+
 ## UI Layer
 * Consists of View and Controller classes - this is where all of our menus will be printed to the console, user input gathered on choices/actions to perform and then passed to the Service
 ### View
