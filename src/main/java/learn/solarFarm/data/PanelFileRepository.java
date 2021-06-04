@@ -1,9 +1,13 @@
 package learn.solarFarm.data;
 
+import learn.solarFarm.models.Material;
 import learn.solarFarm.models.Panel;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PanelFileRepository implements PanelRepository {
@@ -20,7 +24,27 @@ public class PanelFileRepository implements PanelRepository {
 
     @Override
     public List<Panel> findAll() throws DataAccessException {
-        return null;
+        List<Panel> allPanels = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            reader.readLine();
+            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                String[] fields = line.split(",", -1);
+                if (fields.length == 7) {
+                    Panel panel = new Panel();
+                    panel.setPanelId(Integer.parseInt(fields[0]));
+                    panel.setSection(fields[1]);
+                    panel.setRow(Integer.parseInt(fields[2]));
+                    panel.setCol(Integer.parseInt(fields[3]));
+                    panel.setYear(Integer.parseInt(fields[4]));
+                    panel.setMaterial(Material.valueOf(fields[5]));
+                    panel.setTracking(Boolean.getBoolean(fields[6])); // not sure if this getBoolean is what I need
+                    allPanels.add(panel);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace(); // not sure if I need to do this here...
+        }
+        return allPanels;
     }
 
     @Override

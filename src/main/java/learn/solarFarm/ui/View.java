@@ -1,5 +1,8 @@
 package learn.solarFarm.ui;
 
+import learn.solarFarm.models.Panel;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -27,6 +30,26 @@ public class View {
         System.out.println(message);
         System.out.println("=".repeat(length));
     }
+
+    public void printPanels(List<Panel> panels) {
+
+        if (panels == null || panels.size() == 0) {
+            System.out.println();
+            System.out.println("No Panels Found.");
+        } else {
+            for (Panel p : panels) {
+                System.out.printf("ID: %s, Section: %s, Row: %s, Column: %s, Year: %s, Material: %s, Tracked? %s%n",
+                        p.getPanelId(),
+                        p.getSection(),
+                        p.getRow(),
+                        p.getCol(),
+                        p.getYear(),
+                        p.getMaterial(),
+                        p.isTracking());
+            }
+        }
+    }
+
     private String readRequiredString(String prompt) {
         String result = null;
         do {

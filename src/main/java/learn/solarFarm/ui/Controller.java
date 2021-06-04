@@ -4,6 +4,8 @@ import learn.solarFarm.data.DataAccessException;
 import learn.solarFarm.domain.PanelService;
 import learn.solarFarm.models.Panel;
 
+import java.util.List;
+
 public class Controller {
 
     private View view;
@@ -15,7 +17,7 @@ public class Controller {
     }
 
     public void run() {
-        view.displayHeader("Welcome To Unexplained Encounters.");
+        view.displayHeader("Welcome To Elon Musk's Solar Farm.");
 
         try {
             runMenuLoop();
@@ -52,11 +54,13 @@ public class Controller {
         } while (option != 0);
     }
 
-    private void displayAllPanels() {
-
+    private void displayAllPanels() throws DataAccessException {
+        List<Panel> panels = service.findAll();
+        view.displayHeader("Viewing All Panels");
+        view.printPanels(panels);
     }
 
-    private void displayPanelsBySection() {
+    private void displayPanelsBySection() throws DataAccessException {
 
     }
 
