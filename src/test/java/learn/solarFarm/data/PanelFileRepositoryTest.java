@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 
 class PanelFileRepositoryTest {
 
@@ -60,7 +61,17 @@ class PanelFileRepositoryTest {
     }
 
     @Test
-    void update() {
+    void shouldUpdateExistingPanel() throws DataAccessException {
+        List<Panel> panels = repository.findAll();
+        Panel panel = panels.get(0); // 1, Moon, 5, 5, 2020, CDTE, true;
+        panel.setTracking(false);
+        panel.setRow(10);
+        panel.setCol(10);
+        panel.setSection("Venus");
+
+        assertTrue(repository.update(panel));
+        assertEquals(10, panels.get(0).getRow());
+        assertEquals("Venus", panels.get(0).getSection());
     }
 
     @Test

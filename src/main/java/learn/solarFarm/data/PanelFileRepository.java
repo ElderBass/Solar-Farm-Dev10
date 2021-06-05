@@ -71,11 +71,19 @@ public class PanelFileRepository implements PanelRepository {
 
     @Override
     public Panel findById(int panelId) throws DataAccessException {
+
         return null;
     }
 
     @Override
     public boolean update(Panel panel) throws DataAccessException {
+        List<Panel> panels = findAll();
+        for (int i = 0; i < panels.size(); i++) {
+            if (panels.get(i).getPanelId() == panel.getPanelId()) {
+                panels.set(i, panel);
+                return true;
+            }
+        }
         return false;
     }
 
