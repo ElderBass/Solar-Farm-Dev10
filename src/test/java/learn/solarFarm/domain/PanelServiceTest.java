@@ -6,14 +6,30 @@ import learn.solarFarm.models.Material;
 import learn.solarFarm.models.Panel;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PanelServiceTest {
 
-    // TODO - set up repository double, establish known good state in here, test findAll and add right away
-
     private PanelRepository repository = new PanelRepositoryDouble();
     PanelService service = new PanelService(repository);
+
+    @Test
+    void shouldFindBySection() throws DataAccessException {
+        List<Panel> panels = service.findBySection("Mars");
+        assertEquals(2, panels.size());
+
+        panels = service.findBySection("Moon");
+        assertEquals(2, panels.size());
+    }
+
+    @Test
+    void shouldFindById() throws DataAccessException {
+        Panel panel = service.findById(1);
+        assertEquals("Mars", panel.getSection());
+    }
 
     @Test
     void shouldAddValidPanel() throws DataAccessException {
@@ -109,6 +125,20 @@ class PanelServiceTest {
     void shouldNotUpdatePanelWithIdLessThanEqualToZero() throws DataAccessException {
         Panel panel = new Panel(0, "Mars", 5, 6, 2020, Material.AMORPHOUS_SI, false);
         PanelResult result = service.update(panel);
+        assertFalse(result.isSuccess());
+    }
+
+    // TODO need all those other test cases for update..? Can't update without [field], etc.?
+
+    @Test
+    void shouldDeleteExistingPanel() throws DataAccessException {
+        PanelResult result = service.deleteById(1);
+        assertTrue(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotDeleteNonexistentPanel() throws DataAccessException {
+        PanelResult result = service.deleteById(100);
         assertFalse(result.isSuccess());
     }
 

@@ -19,6 +19,14 @@ public class PanelService {
         return repository.findAll();
     }
 
+    public List<Panel> findBySection(String section) throws DataAccessException {
+        return repository.findBySection(section);
+    }
+
+    public Panel findById(int panelId) throws DataAccessException {
+        return repository.findById(panelId);
+    }
+
     public PanelResult add(Panel panel) throws DataAccessException {
         PanelResult result = validate(panel);
         if (!result.isSuccess()) {
@@ -54,6 +62,15 @@ public class PanelService {
             } else {
                 result.addErrorMessage("Could not find panel with that id.");
             }
+        }
+        return result;
+    }
+
+    public PanelResult deleteById(int panelId) throws DataAccessException {
+        PanelResult result = new PanelResult();
+        boolean isDeleted = repository.deleteById(panelId);
+        if (!isDeleted) {
+            result.addErrorMessage("Could not find encounter with that id.");
         }
         return result;
     }
