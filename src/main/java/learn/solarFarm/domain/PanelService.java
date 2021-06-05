@@ -21,11 +21,9 @@ public class PanelService {
 
     public PanelResult add(Panel panel) throws DataAccessException {
         PanelResult result = validate(panel);
-        // TODO Validate, check for duplicates, and set it as payload if it passes checks
         if (!result.isSuccess()) {
             return result;
         }
-
         // check for duplicate
         List<Panel> panels = repository.findAll();
         for (Panel e : panels) {
@@ -36,6 +34,27 @@ public class PanelService {
         }
         panel = repository.add(panel);
         result.setPayload(panel);
+        return result;
+    }
+
+    public PanelResult update(Panel panel) throws DataAccessException {
+        PanelResult result = validate(panel);
+
+        if (result.getMessages().contains("Panel Cannot Be Null.")) {
+            return result;
+        }
+
+        if (panel.getPanelId() <= 0) {
+            result.addErrorMessage("ID must be greater than 0");
+        }
+
+        if (result.isSuccess()) {
+            if (repository.update(panel)) {
+                result.setPayload(panel);
+            } else {
+                result.addErrorMessage("Could not find panel with that id.");
+            }
+        }
         return result;
     }
 

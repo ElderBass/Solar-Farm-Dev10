@@ -45,7 +45,7 @@ class PanelFileRepositoryTest {
     }
 
     @Test
-    void shouldAdd() throws DataAccessException {
+    void shouldAddNewPanel() throws DataAccessException {
         Panel panel = new Panel(6, "Test Section", 5, 5, 2020, Material.AMORPHOUS_SI, true);
         Panel actual = repository.add(panel);
 
