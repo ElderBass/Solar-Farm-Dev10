@@ -43,8 +43,9 @@ public class PanelService {
         PanelResult result = new PanelResult();
         if (panel == null) {
             result.addErrorMessage("Panel Cannot Be Null.");
+            return result; // return here since we'll get a null pointer exception if we keep trying to do stuff with this
         }
-        if (panel.getSection().isEmpty() || panel.getSection() == null) {
+        if (panel.getSection() == null || panel.getSection().isEmpty()) {
             result.addErrorMessage("Panel Section is Required.");
         }
         if (panel.getRow() < 1 || panel.getRow() > 250) {
@@ -54,7 +55,7 @@ public class PanelService {
             result.addErrorMessage("Panel Rows and Columns Must Be Between 1 and 250.");
         }
         if (panel.getYear() > 2021) {
-            result.addErrorMessage("Panel's Cannot Be Installed In the Future. (Or can they...??)");
+            result.addErrorMessage("Panels Cannot Be Installed In the Future. (Or can they...??)");
         }
         if (panel.getMaterial() == null) { // Honestly probably won't even need this since I will guarantee they make an entry in View
             result.addErrorMessage("Panel Material is Required.");
