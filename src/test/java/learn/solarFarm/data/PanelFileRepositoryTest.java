@@ -29,8 +29,6 @@ class PanelFileRepositoryTest {
         Files.copy(Paths.get(SEED_PATH), Paths.get(TEST_PATH), StandardCopyOption.REPLACE_EXISTING);
     }
 
-
-
     @Test
     void shouldFindAll() throws DataAccessException {
         int actual = repository.findAll().size();
@@ -55,7 +53,6 @@ class PanelFileRepositoryTest {
         assertEquals(6, actual.getPanelId());
     }
 
-
     @Test
     void shouldUpdateExistingPanel() throws DataAccessException {
         List<Panel> panels = repository.findAll();
@@ -71,6 +68,13 @@ class PanelFileRepositoryTest {
     }
 
     @Test
+    void shouldNotUpdateNonexistentPanel() throws DataAccessException {
+        Panel panel = new Panel();
+        panel.setPanelId(20);
+        assertFalse(repository.update(panel));
+    }
+
+    @Test
     void shouldDeleteExistingPanel() throws DataAccessException {
 
         // Delete first entry in our seed file = 1, Moon, 5, 5, 2020, CDTE, true;
@@ -81,5 +85,11 @@ class PanelFileRepositoryTest {
 
         // Also check if the new first entry in the seed file is indeed the former 2nd entry by comparing IDs
         assertEquals(4, panels.size());
+    }
+
+    @Test
+    void shouldNotDeleteNonexistentPanel() throws DataAccessException {
+        boolean deleted = repository.deleteById(12);
+        assertFalse(deleted);
     }
 }
