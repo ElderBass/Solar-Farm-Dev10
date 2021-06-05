@@ -1,5 +1,7 @@
 package learn.solarFarm.ui;
 
+import learn.solarFarm.domain.PanelResult;
+import learn.solarFarm.models.Material;
 import learn.solarFarm.models.Panel;
 
 import java.util.List;
@@ -31,6 +33,21 @@ public class View {
         System.out.println("=".repeat(length));
     }
 
+    public void printResult(PanelResult result) {
+        if (result.isSuccess()) {
+            if (result.getPayload() != null) {
+                System.out.printf("Panel Id %s added.%n", result.getPayload().getPanelId());
+            } else {
+                System.out.println("Panel has been deleted");
+            }
+        } else {
+            displayHeader("Errors");
+            for (String msg : result.getMessages()) {
+                System.out.printf("- %s%n", msg);
+            }
+        }
+    }
+
     public void printPanels(List<Panel> panels) {
 
         if (panels == null || panels.size() == 0) {
@@ -50,6 +67,25 @@ public class View {
         }
     }
 
+    public Panel createPanel() {
+        Panel panel = new Panel();
+        panel.setSection(readRequiredString("Farm Section: "));
+        panel.setRow(readInt("Row: "));
+        panel.setCol(readInt("Column: "));
+        panel.setYear(readInt("Year Installed: "));
+        panel.setMaterial(Material.valueOf(readRequiredString(("Material Type: "))));
+        panel.setTracking((readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y") ? true : false));
+        return panel;
+    }
+// TODO might need this but might not, going to try it without first
+
+//    private Material readMaterial(String materialType) {
+//        Material material;
+//        switch(materialType) {
+//            case "Multi-Si":
+//                material = Material.
+//        }
+//    }
     private String readRequiredString(String prompt) {
         String result = null;
         do {

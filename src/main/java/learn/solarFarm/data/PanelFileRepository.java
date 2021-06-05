@@ -48,8 +48,25 @@ public class PanelFileRepository implements PanelRepository {
     }
 
     @Override
+    public List<Panel> findBySection(String section) throws DataAccessException {
+        // TODO not going to be here but eventually will want to display a list of options for all the sections there are
+        List<Panel> allPanels = findAll();
+        List<Panel> sectionPanels = null;
+        for (Panel p : allPanels) {
+            if (p.getSection().equals(section)) {
+                sectionPanels.add(p);
+            }
+        }
+        return sectionPanels;
+    }
+
+    @Override
     public Panel add(Panel panel) throws DataAccessException {
-        return null;
+        List<Panel> panels = findAll();
+        panel.setPanelId(getNextId(panels));
+        panels.add(panel);
+        writeAll(panels);
+        return panel;
     }
 
     @Override
@@ -97,17 +114,4 @@ public class PanelFileRepository implements PanelRepository {
                 panel.isTracking());
     }
 
-//    private Encounter deserialize(String line) {
-//        String[] fields = line.split(DELIMITER, -1);
-//        if (fields.length == 5) {
-//            Encounter encounter = new Encounter();
-//            encounter.setEncounterId(Integer.parseInt(fields[0]));
-//            encounter.setType(EncounterType.valueOf(fields[1]));
-//            encounter.setWhen(restore(fields[2]));
-//            encounter.setDescription(restore(fields[3]));
-//            encounter.setOccurrences(Integer.parseInt(fields[4]));
-//            return encounter;
-//        }
-//        return null;
-//    }
 }

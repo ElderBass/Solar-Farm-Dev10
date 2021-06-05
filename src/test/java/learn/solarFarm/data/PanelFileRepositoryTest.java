@@ -35,6 +35,11 @@ class PanelFileRepositoryTest {
     }
 
     @Test
+    void shouldFindPanelsBySection() throws DataAccessException {
+
+    }
+
+    @Test
     void add() {
     }
 

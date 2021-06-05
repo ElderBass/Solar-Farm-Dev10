@@ -1,6 +1,7 @@
 package learn.solarFarm.ui;
 
 import learn.solarFarm.data.DataAccessException;
+import learn.solarFarm.domain.PanelResult;
 import learn.solarFarm.domain.PanelService;
 import learn.solarFarm.models.Panel;
 
@@ -65,6 +66,9 @@ public class Controller {
     }
 
     private Panel addPanel() throws DataAccessException {
+        Panel panel = view.createPanel();
+        PanelResult result = service.add(panel);
+        view.printResult(result);
         return null;
     }
 
