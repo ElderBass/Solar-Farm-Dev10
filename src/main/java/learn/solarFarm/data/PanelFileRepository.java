@@ -51,7 +51,7 @@ public class PanelFileRepository implements PanelRepository {
     public List<Panel> findBySection(String section) throws DataAccessException {
         // TODO not going to be here but eventually will want to display a list of options for all the sections there are
         List<Panel> allPanels = findAll();
-        List<Panel> sectionPanels = null;
+        List<Panel> sectionPanels = new ArrayList<>();
         for (Panel p : allPanels) {
             if (p.getSection().equals(section)) {
                 sectionPanels.add(p);

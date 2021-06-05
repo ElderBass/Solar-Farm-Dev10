@@ -38,7 +38,11 @@ class PanelFileRepositoryTest {
 
     @Test
     void shouldFindPanelsBySection() throws DataAccessException {
+        int actual = repository.findBySection("Mars").size();
+        assertEquals(2, actual);
 
+        actual = repository.findBySection("Moon").size();
+        assertEquals(2, actual);
     }
 
     @Test
