@@ -1,5 +1,7 @@
 package learn.solarFarm.data;
 
+import learn.solarFarm.models.Material;
+import learn.solarFarm.models.Panel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,8 +42,14 @@ class PanelFileRepositoryTest {
     }
 
     @Test
-    void add() {
+    void shouldAdd() throws DataAccessException {
+        Panel panel = new Panel(6, "Test Section", 5, 5, 2020, Material.AMORPHOUS_SI, true);
+        Panel actual = repository.add(panel);
+
+        assertNotNull(panel);
+        assertEquals(6, actual.getPanelId());
     }
+
 
     @Test
     void findById() {
