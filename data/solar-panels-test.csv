@@ -1,6 +1,5 @@
 panel_id,section,row,col,year,material,isTracked
-1,Mars,5,5,2020,CDTE,true
-2,Moon,6,6,2020,CIGS,true
+2,Moon,6,6,2020,CIGS,false
 3,Venus,7,7,2019,CDTE,false
 4,Mars,8,8,2019,CIGS,false
-5,Moon,9,9,2018,CDTE,true
+5,Moon,9,9,2018,CDTE,false

@@ -71,7 +71,12 @@ public class PanelFileRepository implements PanelRepository {
 
     @Override
     public Panel findById(int panelId) throws DataAccessException {
-
+        List<Panel> panels = findAll();
+        for (Panel p : panels) {
+            if (p.getPanelId() == panelId) {
+                return p;
+            }
+        }
         return null;
     }
 
@@ -81,6 +86,7 @@ public class PanelFileRepository implements PanelRepository {
         for (int i = 0; i < panels.size(); i++) {
             if (panels.get(i).getPanelId() == panel.getPanelId()) {
                 panels.set(i, panel);
+                writeAll(panels);
                 return true;
             }
         }
@@ -89,6 +95,14 @@ public class PanelFileRepository implements PanelRepository {
 
     @Override
     public boolean deleteById(int panelId) throws DataAccessException {
+        List<Panel> panels = findAll();
+        for (int i = 0; i < panels.size(); i++) {
+            if (panels.get(i).getPanelId() == panelId) {
+                panels.remove(i);
+                writeAll(panels);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -112,7 +126,7 @@ public class PanelFileRepository implements PanelRepository {
     }
 
     private String serialize(Panel panel) {
-        return String.format("%s,%s,%s,%s,%s",
+        return String.format("%s,%s,%s,%s,%s,%s,%s",
                 panel.getPanelId(),
                 panel.getSection(),
                 panel.getRow(),

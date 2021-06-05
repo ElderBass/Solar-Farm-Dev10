@@ -57,10 +57,6 @@ class PanelFileRepositoryTest {
 
 
     @Test
-    void findById() {
-    }
-
-    @Test
     void shouldUpdateExistingPanel() throws DataAccessException {
         List<Panel> panels = repository.findAll();
         Panel panel = panels.get(0); // 1, Moon, 5, 5, 2020, CDTE, true;
@@ -75,6 +71,15 @@ class PanelFileRepositoryTest {
     }
 
     @Test
-    void deleteById() {
+    void shouldDeleteExistingPanel() throws DataAccessException {
+
+        // Delete first entry in our seed file = 1, Moon, 5, 5, 2020, CDTE, true;
+        boolean result = repository.deleteById(1);
+        assertTrue(result);
+
+        List<Panel> panels = repository.findAll();
+
+        // Also check if the new first entry in the seed file is indeed the former 2nd entry by comparing IDs
+        assertEquals(4, panels.size());
     }
 }
