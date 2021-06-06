@@ -85,7 +85,7 @@ public class Panel {
     }
 
     public void setTracking(boolean tracking) {
-        isTracking = tracking;
+        this.isTracking = tracking;
     }
 
 

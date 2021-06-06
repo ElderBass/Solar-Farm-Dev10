@@ -37,7 +37,11 @@ public class PanelFileRepository implements PanelRepository {
                     panel.setCol(Integer.parseInt(fields[3]));
                     panel.setYear(Integer.parseInt(fields[4]));
                     panel.setMaterial(Material.valueOf(fields[5]));
-                    panel.setTracking(Boolean.getBoolean(fields[6])); // not sure if this getBoolean is what I need
+                    if (fields[6].equalsIgnoreCase("true")) {
+                        panel.setTracking(true);
+                    } else {
+                        panel.setTracking(false);
+                    }
                     allPanels.add(panel);
                 }
             }
