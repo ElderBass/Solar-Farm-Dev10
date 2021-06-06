@@ -34,7 +34,6 @@ public class Controller {
             option = view.displayMenuAndSelect();
             switch(option) {
                 case 0:
-                    view.displayHeader("Goodbye.");
                     break;
                 case 1:
                     displayAllPanels();
@@ -85,7 +84,11 @@ public class Controller {
     }
 
     private void deletePanel() throws DataAccessException {
-
+        view.displayHeader("Delete a Panel");
+        List<Panel> panels = service.findAll();
+        int panelId = view.deletePanel(panels);
+        PanelResult result = service.deleteById(panelId);
+        view.printResult(result);
     }
 
 }

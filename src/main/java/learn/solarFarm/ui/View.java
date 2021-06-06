@@ -23,8 +23,8 @@ public class View {
         System.out.println("2. Display Panels By Section");
         System.out.println("3. Add a Panel");
         System.out.println("4. Update a Panel");
-        System.out.println("4. Delete a Panel");
-        return readInt("Choose [0-4]:", 0, 5);
+        System.out.println("5. Delete a Panel");
+        return readInt("Choose [0-5]: ", 0, 5);
     }
 
     public String selectSectionToDisplay(List<Panel> panels) {
@@ -37,13 +37,12 @@ public class View {
         }
         displaySections(sections);
         return sections.get(readInt("Choose a Section [1-" + sections.size() + "]: ", 1, sections.size()) - 1);
-
     }
 
     private void displaySections(List<String> sections) {
         displayHeader("Viewing All Sections");
         for (int i = 0; i < sections.size(); i++) {
-            System.out.println((i + 1) + sections.get(i));
+            System.out.println((i + 1) + ". " + sections.get(i));
         }
     }
 
@@ -94,8 +93,14 @@ public class View {
         panel.setRow(readInt("Row: "));
         panel.setCol(readInt("Column: "));
         panel.setYear(readInt("Year Installed: "));
-        panel.setMaterial(Material.valueOf(readRequiredString(("Material Type: "))));
-        panel.setTracking((readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y") ? true : false));
+        panel.setMaterial(printMaterialsAndSelect());
+        // TODO this is not working as expected
+        if (readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y")) {
+            panel.setTracking(true);
+        } else {
+            panel.setTracking(false);
+        }
+        // panel.setTracking((readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y") ? true : false));
         return panel;
     }
 
@@ -110,7 +115,11 @@ public class View {
         }
         String isTracking = readString("Tracking Panel (" + panel.isTracking() + "): ");
         if (isTracking.trim().length() > 0) {
-            panel.setTracking(Boolean.getBoolean(isTracking));
+            if (isTracking.equalsIgnoreCase("true")) {
+                panel.setTracking(true);
+            } else {
+                panel.setTracking(false);
+            }
         }
         return panel;
     }
@@ -129,15 +138,40 @@ public class View {
         System.out.println("Panel Id " + panelId + " not found.");
         return null;
     }
-// TODO might need this but might not, going to try it without first
 
-//    private Material readMaterial(String materialType) {
-//        Material material;
-//        switch(materialType) {
-//            case "Multi-Si":
-//                material = Material.
-//        }
-//    }
+    public int deletePanel(List<Panel> panels) {
+        printPanels(panels);
+        return readInt("Enter the ID of the Panel to Delete: ");
+    }
+
+    private Material printMaterialsAndSelect() {
+        System.out.println("Material Selection:");
+        Material[] materials = Material.values();
+        Material result = null;
+        for (int i = 0; i < materials.length; i++) {
+            System.out.println((i+1) + ". " + materials[i].getAbbreviation());
+        }
+        int choice = readInt("Choose Material [1-5]: ", 1, 5);
+        switch (choice) {
+            case 1:
+                result = Material.MULTI_SI;
+                break;
+            case 2:
+                result = Material.MONO_SI;
+                break;
+            case 3:
+                result = Material.AMORPHOUS_SI;
+                break;
+            case 4:
+                result = Material.CDTE;
+                break;
+            case 5:
+                result = Material.CIGS;
+                break;
+        }
+        return result;
+    }
+
     private String readRequiredString(String prompt) {
         String result = null;
         do {
@@ -163,7 +197,7 @@ public class View {
     private int readInt(String prompt) {
         int result = 0;
         boolean isValid = false;
-        while(!isValid) {
+        while (!isValid) {
             try {
                 result = Integer.parseInt(readRequiredString(prompt));
                 isValid = true;
@@ -173,17 +207,6 @@ public class View {
         }
         return result;
     }
-// TODO convert this to a more relevant readPanelSection() method maybe
-
-//    public OrbiterType readOrbiterType() {
-//        System.out.println("Types:");
-//        OrbiterType[] values = OrbiterType.values();
-//        for (int i = 0; i < values.length; i++) {
-//            System.out.println((i + 1) + ": " + values[i]);
-//        }
-//        int index = readInt("Select [1-5]: ", 1, 5);
-//        return values[index-1];
-//    }
 
     private String readString(String prompt) {
         System.out.print(prompt);
