@@ -79,7 +79,7 @@ public class View {
                         p.getRow(),
                         p.getCol(),
                         p.getYear(),
-                        p.getMaterial(),
+                        p.getMaterial().getAbbreviation(),
                         p.isTracking());
             }
         }
@@ -92,11 +92,7 @@ public class View {
         panel.setCol(readInt("Column: "));
         panel.setYear(readInt("Year Installed: "));
         panel.setMaterial(printMaterialsAndSelect());
-        if (readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y")) {
-            panel.setTracking(true);
-        } else {
-            panel.setTracking(false);
-        }
+        panel.setTracking(readBoolean("Is this Tracked? [y/n] "));
         System.out.println();
         return panel;
     }
@@ -187,7 +183,21 @@ public class View {
         return result;
     }
 
-    // TODO create a readBoolean method to prompt for tracking and ensure a y or n
+    private boolean readBoolean(String prompt) {
+        String choice = "";
+        do {
+            choice = readString(prompt);
+            if (!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n")) {
+                System.out.println("Invalid input. Please enter \"y\" or \"n\".");
+            }
+
+        } while(!choice.equalsIgnoreCase("y") && !choice.equalsIgnoreCase("n"));
+        if (choice.equalsIgnoreCase("y")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private int readInt(String prompt, int min, int max) {
         int result = 0;

@@ -5,3 +5,4 @@ panel_id,section,row,col,year,material,isTracked
 5,Venus,2,2,2002,MULTI_SI,false
 6,Moon,2,2,2020,AMORPHOUS_SI,true
 7,Moon,3,44,2009,AMORPHOUS_SI,true
+8,Moon,3,34,2004,CDTE,true

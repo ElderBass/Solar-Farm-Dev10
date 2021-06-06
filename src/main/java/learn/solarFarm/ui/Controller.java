@@ -65,7 +65,7 @@ public class Controller {
         List<Panel> panels = service.findAll();
         String section = view.selectSectionToDisplay(panels);
         List<Panel> panelsBySection = service.findBySection(section);
-        view.displayHeader("Viewing Panels in Section " + section);
+        view.displayHeader("Viewing Panels in Section \"" + section + "\"");
         view.printPanels(panelsBySection);
     }
 
