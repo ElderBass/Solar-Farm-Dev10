@@ -128,7 +128,6 @@ class PanelServiceTest {
         assertFalse(result.isSuccess());
     }
 
-    // TODO need all those other test cases for update..? Can't update without [field], etc.?
     @Test
     void shouldNotUpdateEmptySection() throws DataAccessException {
         Panel panel = new Panel(1, "", 5, 6, 2020, Material.AMORPHOUS_SI, true);
@@ -159,6 +158,13 @@ class PanelServiceTest {
 
         panel = new Panel(0, "Test Section", 5, 0, 2020, Material.AMORPHOUS_SI, true);
         result = service.update(panel);
+        assertFalse(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotUpdateEmptyMaterial() throws DataAccessException {
+        Panel panel = new Panel(0, "Test Section", 5, 5, 2020, null, true);
+        PanelResult result = service.add(panel);
         assertFalse(result.isSuccess());
     }
     
