@@ -5,7 +5,6 @@ import learn.solarFarm.data.PanelRepository;
 import learn.solarFarm.models.Panel;
 
 import java.util.List;
-import java.util.Objects;
 
 public class PanelService {
 
@@ -42,6 +41,7 @@ public class PanelService {
         }
         panel = repository.add(panel);
         result.setPayload(panel);
+        System.out.println("Panel " + panel.getPanelId() + " Has Been Added.");
         return result;
     }
 
@@ -59,6 +59,7 @@ public class PanelService {
         if (result.isSuccess()) {
             if (repository.update(panel)) {
                 result.setPayload(panel);
+                System.out.println("Panel " + panel.getPanelId() + " Has Been Updated.");
             } else {
                 result.addErrorMessage("Could Not Find Panel With ID " + panel.getPanelId());
             }
@@ -72,6 +73,8 @@ public class PanelService {
         if (!isDeleted) {
             result.addErrorMessage("Could Not Find Panel With ID " + panelId);
         }
+        System.out.println();
+        System.out.println("Panel " + panelId + " Has Been Deleted.");
         return result;
     }
 

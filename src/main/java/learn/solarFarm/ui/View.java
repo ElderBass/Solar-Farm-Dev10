@@ -24,7 +24,8 @@ public class View {
         System.out.println("3. Add a Panel");
         System.out.println("4. Update a Panel");
         System.out.println("5. Delete a Panel");
-        return readInt("Choose [0-5]: ", 0, 5);
+        System.out.println();
+        return readInt("Choose an Option [0-5]: ", 0, 5);
     }
 
     public String selectSectionToDisplay(List<Panel> panels) {
@@ -55,15 +56,12 @@ public class View {
 
     public void printResult(PanelResult result) {
         if (result.isSuccess()) {
-            if (result.getPayload() != null) {
-                System.out.printf("Panel Id %s added.%n", result.getPayload().getPanelId());
-            } else {
-                System.out.println("Panel has been deleted");
-            }
+            System.out.println("Operation Successful.");
         } else {
             displayHeader("Errors");
             for (String msg : result.getMessages()) {
                 System.out.printf("- %s%n", msg);
+                System.out.println("Could not perform operation. Please try again.");
             }
         }
     }
@@ -94,21 +92,24 @@ public class View {
         panel.setCol(readInt("Column: "));
         panel.setYear(readInt("Year Installed: "));
         panel.setMaterial(printMaterialsAndSelect());
-        // TODO this is not working as expected
         if (readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y")) {
             panel.setTracking(true);
         } else {
             panel.setTracking(false);
         }
-        // panel.setTracking((readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y") ? true : false));
+        System.out.println();
         return panel;
     }
 
     public Panel update(Panel panel) {
-        String description = readString("Material (" + panel.getMaterial() + "): ");
-        if (description.trim().length() > 0) {
-            panel.setMaterial(Material.valueOf(description));
-        }
+        displayHeader("Updating Panel");
+        System.out.println();
+        System.out.println("Make selection for Material with numberpad.");
+        System.out.println("Hit [Enter] to keep other fields at their previous values.");
+        System.out.println();
+        System.out.println("Previous Material: " + panel.getMaterial().getAbbreviation());
+        Material material = printMaterialsAndSelect();
+        panel.setMaterial(material);
         String year = readString("Year Installed (" + panel.getYear() + "): ");
         if (year.trim().length() > 0) {
             panel.setYear(Integer.parseInt(year));
@@ -121,6 +122,7 @@ public class View {
                 panel.setTracking(false);
             }
         }
+        System.out.println();
         return panel;
     }
 
@@ -129,7 +131,8 @@ public class View {
         if (panels.size() == 0) {
             return null;
         }
-        int panelId = readInt("Enter Panel ID: ");
+        System.out.println();
+        int panelId = readInt("Enter ID of Panel You Wish To Update: ");
         for (Panel p : panels) {
             if (p.getPanelId() == panelId) {
                 return update(p);
@@ -141,6 +144,7 @@ public class View {
 
     public int deletePanel(List<Panel> panels) {
         printPanels(panels);
+        System.out.println();
         return readInt("Enter the ID of the Panel to Delete: ");
     }
 
@@ -182,6 +186,8 @@ public class View {
         } while (result.length() == 0);
         return result;
     }
+
+    // TODO create a readBoolean method to prompt for tracking and ensure a y or n
 
     private int readInt(String prompt, int min, int max) {
         int result = 0;

@@ -70,6 +70,7 @@ public class Controller {
     }
 
     private void addPanel() throws DataAccessException {
+        view.displayHeader("Add a Panel");
         Panel panel = view.createPanel();
         PanelResult result = service.add(panel);
         view.printResult(result);
