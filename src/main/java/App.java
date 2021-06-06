@@ -15,7 +15,5 @@ public class App {
         Controller controller = new Controller(view, service);
 
         controller.run();
-
-
     }
 }

@@ -88,9 +88,14 @@ public class View {
     public Panel createPanel() {
         Panel panel = new Panel();
         panel.setSection(readRequiredString("Farm Section: "));
-        panel.setRow(readInt("Row: "));
-        panel.setCol(readInt("Column: "));
-        panel.setYear(readInt("Year Installed: "));
+
+        /* I understand the PanelService validate() method checks for erroneous Row/Col/Year input,
+        but to me it just makes more sense to keep the user here until they enter a valid int instead
+        of going through the whole process only to find their inputs were invalid. */
+        panel.setRow(readInt("Row: ", 1, 250));
+        panel.setCol(readInt("Column: ", 1, 250));
+        panel.setYear(readInt("Year Installed: ", 1900, 2021));
+
         panel.setMaterial(printMaterialsAndSelect());
         panel.setTracking(readBoolean("Is this Tracked? [y/n] "));
         System.out.println();
