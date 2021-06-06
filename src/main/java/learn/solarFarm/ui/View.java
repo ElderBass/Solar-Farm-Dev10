@@ -177,7 +177,7 @@ public class View {
         do {
             result = readString(prompt).trim();
             if (result.isEmpty()) {
-                System.out.println("Value is required sorry.");
+                System.out.println("Value is required, sorry.");
             }
         } while (result.length() == 0);
         return result;

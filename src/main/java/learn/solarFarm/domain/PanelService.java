@@ -85,10 +85,10 @@ public class PanelService {
             result.addErrorMessage("Panel Section is Required.");
         }
         if (panel.getRow() < 1 || panel.getRow() > 250) {
-            result.addErrorMessage("Panel Rows and Columns Must Be Between 1 and 250.");
+            result.addErrorMessage("Panel Rows Must Be Between 1 and 250.");
         }
         if (panel.getCol() < 1 || panel.getCol() > 250) {
-            result.addErrorMessage("Panel Rows and Columns Must Be Between 1 and 250.");
+            result.addErrorMessage("Panel Columns Must Be Between 1 and 250.");
         }
         if (panel.getYear() > 2021) {
             result.addErrorMessage("Panels Cannot Be Installed In the Future. (Or can they...??)");
