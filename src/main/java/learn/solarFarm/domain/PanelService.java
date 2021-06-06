@@ -60,7 +60,7 @@ public class PanelService {
             if (repository.update(panel)) {
                 result.setPayload(panel);
             } else {
-                result.addErrorMessage("Could not find panel with that id.");
+                result.addErrorMessage("Could Not Find Panel With ID " + panel.getPanelId());
             }
         }
         return result;
@@ -70,7 +70,7 @@ public class PanelService {
         PanelResult result = new PanelResult();
         boolean isDeleted = repository.deleteById(panelId);
         if (!isDeleted) {
-            result.addErrorMessage("Could not find encounter with that id.");
+            result.addErrorMessage("Could Not Find Panel With ID " + panelId);
         }
         return result;
     }

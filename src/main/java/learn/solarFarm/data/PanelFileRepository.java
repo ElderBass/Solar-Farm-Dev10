@@ -12,9 +12,6 @@ import java.util.List;
 
 public class PanelFileRepository implements PanelRepository {
 
-
-    private static final String DELIMITER = ",";
-    private static final String DELIMITER_REPLACEMENT = "@@@";
     private static final String HEADER = "panel_id,section,row,col,year,material,isTracked";
     private final String filePath;
 
@@ -53,7 +50,6 @@ public class PanelFileRepository implements PanelRepository {
 
     @Override
     public List<Panel> findBySection(String section) throws DataAccessException {
-        // TODO not going to be here but eventually will want to display a list of options for all the sections there are
         List<Panel> allPanels = findAll();
         List<Panel> sectionPanels = new ArrayList<>();
         for (Panel p : allPanels) {
