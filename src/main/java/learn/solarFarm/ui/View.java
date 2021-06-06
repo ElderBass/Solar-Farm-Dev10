@@ -16,8 +16,8 @@ public class View {
 
     }
 
-    public int displayMenuAndSelect() {
-        displayHeader("Main Menu");
+    public int displayMainMenuAndSelect() {
+        printHeader("Main Menu");
         System.out.println("0. Exit");
         System.out.println("1. Display All Panels");
         System.out.println("2. Display Panels By Section");
@@ -41,13 +41,13 @@ public class View {
     }
 
     private void displaySections(List<String> sections) {
-        displayHeader("Viewing All Sections");
+        printHeader("Viewing All Sections");
         for (int i = 0; i < sections.size(); i++) {
             System.out.println((i + 1) + ". " + sections.get(i));
         }
     }
 
-    public void displayHeader(String message) {
+    public void printHeader(String message) {
         int length = message.length();
         System.out.println("");
         System.out.println(message);
@@ -58,7 +58,7 @@ public class View {
         if (result.isSuccess()) {
             System.out.println("Operation Successful.");
         } else {
-            displayHeader("Errors");
+            printHeader("Errors");
             for (String msg : result.getMessages()) {
                 System.out.printf("- %s%n", msg);
                 System.out.println("Could not perform operation. Please try again.");
@@ -103,7 +103,7 @@ public class View {
     }
 
     public Panel update(Panel panel) {
-        displayHeader("Updating Panel");
+        printHeader("Updating Panel");
         System.out.println();
         System.out.println("Make selection for Material with numberpad.");
         System.out.println("Hit [Enter] to keep other fields at their previous values.");

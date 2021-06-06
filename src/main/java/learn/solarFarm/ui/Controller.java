@@ -18,20 +18,20 @@ public class Controller {
     }
 
     public void run() {
-        view.displayHeader("Welcome To Elon Musk's Solar Farm.");
+        view.printHeader("Welcome To Elon Musk's Solar Farm.");
 
         try {
             runMenuLoop();
         } catch (DataAccessException ex) {
-            view.displayHeader("CRITICAL ERROR:" + ex.getMessage());
+            view.printHeader("CRITICAL ERROR:" + ex.getMessage());
         }
-        view.displayHeader("Exiting Program. Have a nice day!");
+        view.printHeader("Exiting Program. Have a nice day!");
     }
 
     public void runMenuLoop() throws DataAccessException {
         int option = -1;
         do {
-            option = view.displayMenuAndSelect();
+            option = view.displayMainMenuAndSelect();
             switch(option) {
                 case 0:
                     break;
@@ -56,28 +56,28 @@ public class Controller {
 
     private void displayAllPanels() throws DataAccessException {
         List<Panel> panels = service.findAll();
-        view.displayHeader("Viewing All Panels");
+        view.printHeader("Viewing All Panels");
         view.printPanels(panels);
     }
 
     private void displayPanelsBySection() throws DataAccessException {
-        view.displayHeader("Select a Section");
+        view.printHeader("Select a Section");
         List<Panel> panels = service.findAll();
         String section = view.selectSectionToDisplay(panels);
         List<Panel> panelsBySection = service.findBySection(section);
-        view.displayHeader("Viewing Panels in Section \"" + section + "\"");
+        view.printHeader("Viewing Panels in Section \"" + section + "\"");
         view.printPanels(panelsBySection);
     }
 
     private void addPanel() throws DataAccessException {
-        view.displayHeader("Add a Panel");
+        view.printHeader("Add a Panel");
         Panel panel = view.createPanel();
         PanelResult result = service.add(panel);
         view.printResult(result);
     }
 
     private void updatePanel() throws DataAccessException {
-        view.displayHeader("Update a Panel");
+        view.printHeader("Update a Panel");
         List<Panel> panels = service.findAll();
         Panel panel = view.updatePanel(panels);
         PanelResult result = service.update(panel);
@@ -85,7 +85,7 @@ public class Controller {
     }
 
     private void deletePanel() throws DataAccessException {
-        view.displayHeader("Delete a Panel");
+        view.printHeader("Delete a Panel");
         List<Panel> panels = service.findAll();
         int panelId = view.deletePanel(panels);
         PanelResult result = service.deleteById(panelId);
