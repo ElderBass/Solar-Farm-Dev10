@@ -99,7 +99,6 @@ public class PanelService {
         if (panel.getMaterial() == null) { // Honestly probably won't even need this since I will guarantee they make an entry in View
             result.addErrorMessage("Panel Material is Required.");
         }
-        // TODO figure out if I need to validate isTracking. Again, this will probably get taken care of before it gets here
         return result;
     }
 }

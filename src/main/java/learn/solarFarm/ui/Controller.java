@@ -25,7 +25,7 @@ public class Controller {
         } catch (DataAccessException ex) {
             view.displayHeader("CRITICAL ERROR:" + ex.getMessage());
         }
-        view.displayHeader("Goodbye");
+        view.displayHeader("Exiting Program. Have a nice day!");
     }
 
     public void runMenuLoop() throws DataAccessException {

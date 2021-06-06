@@ -129,6 +129,45 @@ class PanelServiceTest {
     }
 
     // TODO need all those other test cases for update..? Can't update without [field], etc.?
+    @Test
+    void shouldNotUpdateEmptySection() throws DataAccessException {
+        Panel panel = new Panel(1, "", 5, 6, 2020, Material.AMORPHOUS_SI, true);
+        PanelResult result = service.update(panel);
+        assertFalse(result.isSuccess());
+
+        panel = new Panel(1, null, 5, 6, 2020, Material.AMORPHOUS_SI, true);
+        result = service.update(panel);
+        assertFalse(result.isSuccess());
+    }
+    
+    @Test
+    void shouldNotUpdateRowOutOfBounds() throws DataAccessException {
+        Panel panel = new Panel(0, "Test Section", 500, 5, 2020, Material.AMORPHOUS_SI, true);
+        PanelResult result = service.update(panel);
+        assertFalse(result.isSuccess());
+
+        panel = new Panel(0, "Test Section", 0, 10, 2020, Material.AMORPHOUS_SI, true);
+        result = service.update(panel);
+        assertFalse(result.isSuccess());
+    }
+    
+    @Test
+    void shouldNotUpdateColumnOutOfBounds() throws DataAccessException {
+        Panel panel = new Panel(0, "Test Section", 5, 500, 2020, Material.AMORPHOUS_SI, true);
+        PanelResult result = service.update(panel);
+        assertFalse(result.isSuccess());
+
+        panel = new Panel(0, "Test Section", 5, 0, 2020, Material.AMORPHOUS_SI, true);
+        result = service.update(panel);
+        assertFalse(result.isSuccess());
+    }
+    
+    @Test
+    void shouldNotUpdateYearFromFuture() throws DataAccessException {
+        Panel panel = new Panel(1, "", 5, 6, 2040, Material.AMORPHOUS_SI, true);
+        PanelResult result = service.update(panel);
+        assertFalse(result.isSuccess());
+    }
 
     @Test
     void shouldDeleteExistingPanel() throws DataAccessException {
