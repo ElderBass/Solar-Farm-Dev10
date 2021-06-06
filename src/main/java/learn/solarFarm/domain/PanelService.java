@@ -32,7 +32,7 @@ public class PanelService {
         if (!result.isSuccess()) {
             return result;
         }
-        // check for duplicate
+
         List<Panel> panels = repository.findAll();
         for (Panel e : panels) {
             if (panel.getSection().equals(e.getSection()) && e.getRow() == panel.getRow() && e.getCol() == panel.getCol()) {

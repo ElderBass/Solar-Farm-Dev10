@@ -4,6 +4,7 @@ import learn.solarFarm.domain.PanelResult;
 import learn.solarFarm.models.Material;
 import learn.solarFarm.models.Panel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,6 +25,26 @@ public class View {
         System.out.println("4. Update a Panel");
         System.out.println("4. Delete a Panel");
         return readInt("Choose [0-4]:", 0, 5);
+    }
+
+    public String selectSectionToDisplay(List<Panel> panels) {
+        List<String> sections = new ArrayList<>();
+        for (int i = 0; i < panels.size(); i++) {
+            if (!sections.contains(panels.get(i).getSection())) {
+                sections.add(panels.get(i).getSection());
+                continue;
+            }
+        }
+        displaySections(sections);
+        return sections.get(readInt("Choose a Section [1-" + sections.size() + "]: ", 1, sections.size()) - 1);
+
+    }
+
+    private void displaySections(List<String> sections) {
+        displayHeader("Viewing All Sections");
+        for (int i = 0; i < sections.size(); i++) {
+            System.out.println((i + 1) + sections.get(i));
+        }
     }
 
     public void displayHeader(String message) {
@@ -76,6 +97,37 @@ public class View {
         panel.setMaterial(Material.valueOf(readRequiredString(("Material Type: "))));
         panel.setTracking((readRequiredString("Is This Tracked [y/n]? ").equalsIgnoreCase("y") ? true : false));
         return panel;
+    }
+
+    public Panel update(Panel panel) {
+        String description = readString("Material (" + panel.getMaterial() + "): ");
+        if (description.trim().length() > 0) {
+            panel.setMaterial(Material.valueOf(description));
+        }
+        String year = readString("Year Installed (" + panel.getYear() + "): ");
+        if (year.trim().length() > 0) {
+            panel.setYear(Integer.parseInt(year));
+        }
+        String isTracking = readString("Tracking Panel (" + panel.isTracking() + "): ");
+        if (isTracking.trim().length() > 0) {
+            panel.setTracking(Boolean.getBoolean(isTracking));
+        }
+        return panel;
+    }
+
+    public Panel updatePanel(List<Panel> panels) {
+        printPanels(panels);
+        if (panels.size() == 0) {
+            return null;
+        }
+        int panelId = readInt("Enter Panel ID: ");
+        for (Panel p : panels) {
+            if (p.getPanelId() == panelId) {
+                return update(p);
+            }
+        }
+        System.out.println("Panel Id " + panelId + " not found.");
+        return null;
     }
 // TODO might need this but might not, going to try it without first
 

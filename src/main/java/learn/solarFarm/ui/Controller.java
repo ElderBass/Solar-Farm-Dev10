@@ -62,18 +62,26 @@ public class Controller {
     }
 
     private void displayPanelsBySection() throws DataAccessException {
-
+        view.displayHeader("Select a Section");
+        List<Panel> panels = service.findAll();
+        String section = view.selectSectionToDisplay(panels);
+        List<Panel> panelsBySection = service.findBySection(section);
+        view.displayHeader("Viewing Panels in Section " + section);
+        view.printPanels(panelsBySection);
     }
 
-    private Panel addPanel() throws DataAccessException {
+    private void addPanel() throws DataAccessException {
         Panel panel = view.createPanel();
         PanelResult result = service.add(panel);
         view.printResult(result);
-        return null;
     }
 
-    private Panel updatePanel() throws DataAccessException {
-        return null;
+    private void updatePanel() throws DataAccessException {
+        view.displayHeader("Update a Panel");
+        List<Panel> panels = service.findAll();
+        Panel panel = view.updatePanel(panels);
+        PanelResult result = service.update(panel);
+        view.printResult(result);
     }
 
     private void deletePanel() throws DataAccessException {
