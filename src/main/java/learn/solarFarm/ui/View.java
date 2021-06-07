@@ -65,7 +65,7 @@ public class View {
             }
         }
     }
-
+    // Just used one catch-all printPanels method for anytime we needed to print out an array of panels
     public void printPanels(List<Panel> panels) {
 
         if (panels == null || panels.size() == 0) {
@@ -226,7 +226,7 @@ public class View {
         System.out.print(prompt);
         return console.nextLine();
     }
-    
+
     private String readRequiredString(String prompt) {
         String result = null;
         do {
