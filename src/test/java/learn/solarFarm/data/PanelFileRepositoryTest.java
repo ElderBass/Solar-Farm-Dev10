@@ -7,11 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
-//import learn.solarFarm.data.DataAccessException;
-//import learn.solarFarm.data.PanelFileRepository;
-//import learn.solarFarm.data.PanelRepository;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

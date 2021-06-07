@@ -152,6 +152,7 @@ public class View {
     }
 
     // I considered breaking this up into two separate methods but I think this works just fine
+    // TODO mention this
     private Material printMaterialsAndSelect() {
         System.out.println("Material Selection:");
         Material[] materials = Material.values();
@@ -181,6 +182,7 @@ public class View {
     }
 
     // Built this custom (most of the other "read" methods I borrowed from previous projects) - for entering values for isTracking
+    // TODO also this
     private boolean readBoolean(String prompt) {
         String choice = "";
         do {
