@@ -9,7 +9,8 @@ public class Panel {
     private int year;
     private Material material;
     private boolean isTracking;
-
+    // public static int ROW_COL_MAX = 250;
+    //public static int ROW_COL_MIN = 1;
     public Panel() {
 
     }

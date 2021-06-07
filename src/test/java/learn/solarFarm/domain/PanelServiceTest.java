@@ -67,10 +67,10 @@ class PanelServiceTest {
 
     @Test
     void shouldNotAddRowOutOfBounds() throws DataAccessException {
-        PanelResult expected = makeResult("Panel Rows and Columns Must Be Between 1 and 250.");
+        PanelResult expected = makeResult("Panel Rows Must Be Between 1 and 250.");
         Panel panel = new Panel(0, "Test Section", 500, 5, 2020, Material.AMORPHOUS_SI, true);
         PanelResult actual = service.add(panel);
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
 
         panel = new Panel(0, "Test Section", 0, 5, 2020, Material.AMORPHOUS_SI, true);
         actual = service.add(panel);
@@ -79,7 +79,7 @@ class PanelServiceTest {
 
     @Test
     void shouldNotAddColumnOutOfBounds() throws DataAccessException {
-        PanelResult expected = makeResult("Panel Rows and Columns Must Be Between 1 and 250.");
+        PanelResult expected = makeResult("Panel Columns Must Be Between 1 and 250.");
         Panel panel = new Panel(0, "Test Section", 5, 500, 2020, Material.AMORPHOUS_SI, true);
         PanelResult actual = service.add(panel);
         assertEquals(actual, expected);

@@ -80,7 +80,7 @@ public class View {
                         p.getCol(),
                         p.getYear(),
                         p.getMaterial().getAbbreviation(),
-                        p.isTracking());
+                        p.isTracking()); // TODO change this to yes/no
             }
         }
     }

@@ -7,3 +7,4 @@ panel_id,section,row,col,year,material,isTracked
 7,Moon,3,44,2009,AMORPHOUS_SI,true
 8,Moon,3,34,2004,CDTE,true
 9,Mars,240,240,2003,CIGS,true
+10,Mars,56,56,2003,AMORPHOUS_SI,true

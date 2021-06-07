@@ -47,6 +47,7 @@ public class PanelService {
     public PanelResult update(Panel panel) throws DataAccessException {
         PanelResult result = validate(panel);
 
+        // TODO change this to !result.isSuccess()
         if (result.getMessages().contains("Panel Cannot Be Null.")) {
             return result;
         }

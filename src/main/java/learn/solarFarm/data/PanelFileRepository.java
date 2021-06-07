@@ -3,10 +3,7 @@ package learn.solarFarm.data;
 import learn.solarFarm.models.Material;
 import learn.solarFarm.models.Panel;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +39,11 @@ public class PanelFileRepository implements PanelRepository {
                     allPanels.add(panel);
                 }
             }
-        } catch (IOException ex) {
-            ex.printStackTrace(); // not sure if I need to do this here...
+        } catch (FileNotFoundException ex) {
+
+        }
+        catch (IOException ex) {
+            throw new DataAccessException("Unexpected exception in repository", ex);
         }
         return allPanels;
     }
