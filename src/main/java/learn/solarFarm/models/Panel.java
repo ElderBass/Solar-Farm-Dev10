@@ -1,14 +1,6 @@
 package learn.solarFarm.models;
 
 public class Panel {
-    //    Rules
-//    Section is required and cannot be blank.
-//    Row is a positive number less than or equal to 250.
-//    Column is a positive number less than or equal to 250.
-//    Year Installed must be in the past.
-//    Material is required and can only be one of the five materials listed.
-//    Is Tracking is required.
-//    The combined values of Section, Row, and Column may not be duplicated.
 
     private int panelId;
     private String section;

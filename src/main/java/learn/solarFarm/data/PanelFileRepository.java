@@ -20,7 +20,7 @@ public class PanelFileRepository implements PanelRepository {
     }
 
     @Override
-    public List<Panel> findAll() throws DataAccessException {
+    public List<Panel> findAll() throws DataAccessException { // Have this throwing DataAccessException but don't think that's necessary
         List<Panel> allPanels = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             reader.readLine();
@@ -69,6 +69,7 @@ public class PanelFileRepository implements PanelRepository {
         return panel;
     }
 
+    // I really don't think I needed this and never actually used it in relevant methods. Probably redundant
     @Override
     public Panel findById(int panelId) throws DataAccessException {
         List<Panel> panels = findAll();
@@ -135,5 +136,4 @@ public class PanelFileRepository implements PanelRepository {
                 panel.getMaterial(),
                 panel.isTracking());
     }
-
 }

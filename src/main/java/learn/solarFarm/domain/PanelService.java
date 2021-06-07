@@ -31,7 +31,6 @@ public class PanelService {
         if (!result.isSuccess()) {
             return result;
         }
-
         List<Panel> panels = repository.findAll();
         for (Panel e : panels) {
             if (panel.getSection().equals(e.getSection()) && e.getRow() == panel.getRow() && e.getCol() == panel.getCol()) {
@@ -51,11 +50,9 @@ public class PanelService {
         if (result.getMessages().contains("Panel Cannot Be Null.")) {
             return result;
         }
-
         if (panel.getPanelId() <= 0) {
             result.addErrorMessage("ID must be greater than 0");
         }
-
         if (result.isSuccess()) {
             if (repository.update(panel)) {
                 result.setPayload(panel);

@@ -73,7 +73,7 @@ public class View {
             System.out.println("No Panels Found.");
         } else {
             for (Panel p : panels) {
-                System.out.printf("ID: %s, Section: %s, Row: %s, Column: %s, Year: %s, Material: %s, Tracked? %s%n",
+                System.out.printf("ID: %s | Section: %s | Row: %s | Column: %s | Year: %s | Material: %s | Tracked? %s%n",
                         p.getPanelId(),
                         p.getSection(),
                         p.getRow(),
@@ -87,7 +87,9 @@ public class View {
 
     public Panel createPanel() {
         Panel panel = new Panel();
-        panel.setSection(readRequiredString("Farm Section: "));
+        System.out.println("~Please fill out the following fields~");
+        System.out.println();
+        panel.setSection(readRequiredString("Section: "));
 
         /* I understand the PanelService validate() method checks for erroneous Row/Col/Year input,
         but to me it just makes more sense to keep the user here until they enter a valid int instead
@@ -149,6 +151,7 @@ public class View {
         return readInt("Enter the ID of the Panel to Delete: ");
     }
 
+    // I considered breaking this up into two separate methods but I think this works just fine
     private Material printMaterialsAndSelect() {
         System.out.println("Material Selection:");
         Material[] materials = Material.values();
@@ -177,17 +180,7 @@ public class View {
         return result;
     }
 
-    private String readRequiredString(String prompt) {
-        String result = null;
-        do {
-            result = readString(prompt).trim();
-            if (result.isEmpty()) {
-                System.out.println("Value is required, sorry.");
-            }
-        } while (result.length() == 0);
-        return result;
-    }
-
+    // Built this custom (most of the other "read" methods I borrowed from previous projects) - for entering values for isTracking
     private boolean readBoolean(String prompt) {
         String choice = "";
         do {
@@ -232,6 +225,17 @@ public class View {
     private String readString(String prompt) {
         System.out.print(prompt);
         return console.nextLine();
+    }
+    
+    private String readRequiredString(String prompt) {
+        String result = null;
+        do {
+            result = readString(prompt).trim();
+            if (result.isEmpty()) {
+                System.out.println("Value is required, sorry.");
+            }
+        } while (result.length() == 0);
+        return result;
     }
 
 }

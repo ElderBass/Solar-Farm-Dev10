@@ -18,14 +18,14 @@ public class Controller {
     }
 
     public void run() {
-        view.printHeader("Welcome To Elon Musk's Solar Farm.");
+        view.printHeader("Welcome To Elon Musk's Solar City.");
 
         try {
             runMenuLoop();
         } catch (DataAccessException ex) {
             view.printHeader("CRITICAL ERROR:" + ex.getMessage());
         }
-        view.printHeader("Exiting Program. Have a nice day!");
+        view.printHeader("Exiting Program. Have a sunny day!");
     }
 
     public void runMenuLoop() throws DataAccessException {
