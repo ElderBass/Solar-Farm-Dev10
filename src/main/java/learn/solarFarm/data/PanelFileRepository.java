@@ -7,12 +7,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class PanelFileRepository implements PanelRepository {
 
     private static final String HEADER = "panel_id,section,row,col,year,material,isTracked";
     private final String filePath;
 
-    public PanelFileRepository(String filePath) {
+    public PanelFileRepository(@Value("${dataFilePath}") String filePath) {
         this.filePath = filePath;
     }
 

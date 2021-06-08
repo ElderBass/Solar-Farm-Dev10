@@ -5,7 +5,9 @@ import learn.solarFarm.data.PanelRepository;
 import learn.solarFarm.models.Panel;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PanelService {
 
     private final PanelRepository repository;

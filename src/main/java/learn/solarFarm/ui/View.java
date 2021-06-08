@@ -7,7 +7,9 @@ import learn.solarFarm.models.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class View {
 
     private Scanner console = new Scanner(System.in);
