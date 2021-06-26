@@ -1,5 +1,6 @@
 package learn.solarFarm;
 
+import learn.solarFarm.config.AppConfig;
 import learn.solarFarm.data.PanelFileRepository;
 import learn.solarFarm.data.PanelRepository;
 import learn.solarFarm.domain.PanelService;
@@ -15,7 +16,7 @@ public class App {
 
     public static void main(String[] args) {
         // 1. We pass the App.class, this class, as a constructor argument.
-        ApplicationContext context = new AnnotationConfigApplicationContext(App.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         Controller controller = context.getBean(Controller.class);
         // Run the app!

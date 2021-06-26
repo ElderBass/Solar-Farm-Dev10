@@ -1,22 +1,22 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--       xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+<!--        https://www.springframework.org/schema/beans/spring-beans.xsd">-->
 
 
-    <bean id="panelFileRepository" class="learn.solarFarm.data.PanelFileRepository">
-        <constructor-arg value="solar-panels.csv"></constructor-arg>
-    </bean>
+<!--    <bean id="panelFileRepository" class="learn.solarFarm.data.PanelFileRepository">-->
+<!--        <constructor-arg value="solar-panels.csv"></constructor-arg>-->
+<!--    </bean>-->
 
-    <bean id="panelService" class="learn.solarFarm.domain.PanelService">
-        <constructor-arg ref="panelFileRepository"/>
-    </bean>
+<!--    <bean id="panelService" class="learn.solarFarm.domain.PanelService">-->
+<!--        <constructor-arg ref="panelFileRepository"/>-->
+<!--    </bean>-->
 
-    <bean id="view" class="learn.solarFarm.ui.View"/>
+<!--    <bean id="view" class="learn.solarFarm.ui.View"/>-->
 
-    <bean id="controller" class="learn.solarFarm.ui.Controller">
-        <constructor-arg ref="view"/>
-        <constructor-arg ref="panelService"/>
-    </bean>
+<!--    <bean id="controller" class="learn.solarFarm.ui.Controller">-->
+<!--        <constructor-arg ref="view"/>-->
+<!--        <constructor-arg ref="panelService"/>-->
+<!--    </bean>-->
 
-</beans>
+<!--</beans>-->

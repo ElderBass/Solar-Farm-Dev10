@@ -1,4 +1,4 @@
-package learn.solarFarm.data;
+package learn.solarFarm.config;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan
-public class DbTestConfig {
+@ComponentScan("learn.solarFarm")
+public class AppConfig {
 
     @Bean
     public DataSource getDataSource() {
