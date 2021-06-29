@@ -2,6 +2,7 @@ package learn.solarFarm.data;
 
 import learn.solarFarm.models.Material;
 import learn.solarFarm.models.Panel;
+import org.springframework.context.annotation.Profile;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,6 +15,7 @@ import java.sql.Statement;
 import java.util.List;
 
 @Repository
+@Profile("jdbc-template")
 public class PanelJdbcTemplateRepository implements PanelRepository{
 
     private final JdbcTemplate jdbcTemplate;
